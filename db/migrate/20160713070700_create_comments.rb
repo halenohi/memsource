@@ -5,7 +5,7 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.integer :circle, null: false
       t.text :content
 
-      t.integer [:user_id, :cirlce]
+      t.index [:user_id, :cirlce]
       t.timestamps
     end
   end
