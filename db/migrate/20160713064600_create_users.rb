@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email, null: false
 
       # index生成
-      add_index :name, :password, :email
+      t.index [:name, :email]
 
       t.timestamps
     end
