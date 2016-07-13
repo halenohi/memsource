@@ -7,6 +7,7 @@ class CreateCircles < ActiveRecord::Migration[5.0]
 
       #index生成
       t.index [:name]
+      t.integer :members_count, default: 0
 
       t.timestamps
     end
