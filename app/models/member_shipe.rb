@@ -1,0 +1,2 @@
+class MemberShipe < ApplicationRecord
+end
