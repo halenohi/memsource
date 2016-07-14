@@ -1,2 +1,0 @@
-class MemberShipe < ApplicationRecord
-end
