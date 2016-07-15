@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'pages#home'
+  
   namespace :memberships do
     get 'acceptances/create'
   end
