@@ -4,4 +4,5 @@ class Circle < ApplicationRecord
   validates :members_count, presence: true
 
   has_many :memberships
+  has_many :comments
 end

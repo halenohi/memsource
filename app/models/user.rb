@@ -5,4 +5,5 @@ class User < ApplicationRecord
 
   has_many :memberships
   has_many :circles, through: :memberships
+  has_many :comments
 end

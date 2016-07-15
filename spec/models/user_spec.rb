@@ -16,4 +16,12 @@ RSpec.describe User, type: :model do
       expect(user.circles).to eq([circle])
     end
   end
+
+  describe 'associations' do
+    it 'should has many comments' do
+      comment = user.comments.create(comment)
+      expect(user.comments).to eq([comment])
+    end
+  end
+
 end
