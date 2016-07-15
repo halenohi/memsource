@@ -38,6 +38,7 @@ group :development, :test do
   # Use rspec
   gem "rspec-rails"
   gem "factory_girl_rails"
+  gem 'spring-commands-rspec'
 end
 
 group :development do
