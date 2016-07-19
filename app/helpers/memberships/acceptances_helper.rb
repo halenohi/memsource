@@ -1,0 +1,2 @@
+module Memberships::AcceptancesHelper
+end

@@ -40,6 +40,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem 'spring-commands-rspec'
   gem 'tapp'
+  gem 'rails-controller-testing'
 end
 
 group :development do
