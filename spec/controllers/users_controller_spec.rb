@@ -52,9 +52,13 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #destroy" do
-    xit "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+    context 'succes' do
+      it "should delete account" do
+        expect {
+          get :destroy
+          expect(response).to have_http_status(:success)
+        }
+      end
     end
   end
 
