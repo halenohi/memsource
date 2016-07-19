@@ -56,7 +56,7 @@ RSpec.describe UsersController, type: :controller do
       it "should delete account" do
         expect {
           get :destroy
-          expect(response).to have_http_status(:success)
+          expect(response).to change{User.count}.by(-1)
         }
       end
     end

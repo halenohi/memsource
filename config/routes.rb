@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
-  
+
   namespace :memberships do
     get 'acceptances/create'
   end
@@ -40,12 +40,6 @@ Rails.application.routes.draw do
   get 'circles/update'
 
   get 'circles/destroy'
-
-  get 'users/new'
-
-  get 'users/create'
-
-  get 'users/destroy'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

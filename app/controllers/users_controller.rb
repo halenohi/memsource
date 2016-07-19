@@ -1,26 +1,29 @@
 class UsersController < ApplicationController
   def new
+    # HTMLから受け取る場合@が必要
+    @user = User.new
   end
 
   def create
-    user = User.new(params[:user].permit(:email, :name, :password, :password_confirmation))
-    if user.save
+    @user = User.new(params[:user].permit(:email, :name, :password, :password_confirmation))
+    if @user.save
       # 作成成功
       # ログイン
       session[:user_id] = user.id
       redirect_to root_path
     else
       # 作成失敗
+      flash.now.alert = 'もう一度ご記入ください'
       render :new
     end
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
     # ログアウト
-    # @_current_userをnilにする
-    @_current_user = nil
-    reset_session
-    redirect_to root_path
+    session.delete(:user_id)
+    redirect_to login_path
   end
 
   private
