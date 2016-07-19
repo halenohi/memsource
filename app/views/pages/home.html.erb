@@ -1,0 +1,12 @@
+<h2>Login</h2>
+<%= form_for(@user) do |f| %>
+  <div class="name">
+    <p><%= f.text :name, '名前' %></p>
+  </div>
+  <div class="email">
+    <p><%= f.label :email, 'メールアドレス' %></p>
+  </div>
+  <div class="password">
+    <p><%= f.label :password, 'パスワード' %></p>
+  </div>
+<% end %>
