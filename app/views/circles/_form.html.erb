@@ -1,0 +1,12 @@
+<%= form_for @circle do |f| %>
+	<div class="name">
+		<%= f.label :name, 'Name' %>
+		<%= f.text_field :name, placeholder: 'name' %>
+	</div>
+	<div class="description">
+		<%= f.label :description, 'Description' %>
+		<%= f.text_area :description, size: '50*200', placeholder: 'description' %>
+	</div>
+	<br>
+	<%= f.submit 'create' %>
+<% end %>

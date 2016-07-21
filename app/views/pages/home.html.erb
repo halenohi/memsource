@@ -1,12 +1,4 @@
-<h2>Login</h2>
-<%= form_for(@user) do |f| %>
-  <div class="name">
-    <p><%= f.text :name, '名前' %></p>
-  </div>
-  <div class="email">
-    <p><%= f.label :email, 'メールアドレス' %></p>
-  </div>
-  <div class="password">
-    <p><%= f.label :password, 'パスワード' %></p>
-  </div>
-<% end %>
+<h1>home#</h1>
+<%= link_to 'sign up', controller: 'users', action: 'new' %>
+<%= link_to 'sign in', controller: 'sessions', action: 'create' %>
+<%= link_to 'sign out', logout_path, data: { method: 'delete' } %>

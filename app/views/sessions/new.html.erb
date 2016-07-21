@@ -1,0 +1,20 @@
+<h1>Sessions#new</h1>
+<h2>Log In</h2>
+
+<%= debug params %>
+<%# sessionからデータ取得 %>
+<%= form_for(:session, url: login_path) do |f| %>
+  <div class="email">
+  	<%= f.label :email, 'Email：' %>
+    <%= f.text_field :email, placeholder: 'email' %>
+  </div>
+  <div class="password">
+  	<%= f.label :password, 'Password：' %>
+    <%= f.password_field :password, placeholder: 'password' %>
+  </div>
+  <br>
+  
+  <%= f.submit 'check'%>
+<% end %>
+<br>
+<%= link_to 'home', controller: 'pages', action: 'home' %>

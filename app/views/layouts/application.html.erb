@@ -6,10 +6,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag '/assets/favicon_ico.jpg' %>
   </head>
+  <link href="/assets/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 
   <body>
-    <h1>MEMsoure</h1>
+    <h1>MEMsource</h1>
+
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
+
     <%= yield %>
+    <h2>footer</h2>
   </body>
 </html>
