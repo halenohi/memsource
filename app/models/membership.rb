@@ -4,5 +4,5 @@ class Membership < ApplicationRecord
   validates :role, presence: true
 
   belongs_to :user
-  belongs_to :circle
+  belongs_to :circle, counter_cache: :members_count
 end

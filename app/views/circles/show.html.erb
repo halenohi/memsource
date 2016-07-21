@@ -1,2 +1,10 @@
 <h1>Circles#show</h1>
-<p>Find me in app/views/circles/show.html.erb</p>
+
+<h2>Circle Name</h2>
+<p><%= @circle.name %></p>
+<h2>Circle Description</h2>
+<p><%= @circle.description %></p>
+<h2>Circle Member</h2>
+<p><%= @circle.members_count %></p>
+
+<%= link_to 'back', circles_path %> | <%= link_to 'edit', edit_circle_path(@circle) %>

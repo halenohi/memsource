@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user].permit(:email, :name, :password, :password_confirmation))
     if @user.save
       # 作成成功
-      # ログイン
+      # sessionに保存
       session[:user_id] = @user.id
       redirect_to root_path
     else

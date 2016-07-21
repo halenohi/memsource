@@ -23,8 +23,16 @@
 			<p>Circle update time</p>
 		</th>
 	</tr>
-	<tr>
-		<td></td>
-	</tr>
+	<% @circles.each do |circle| %>
+		<tr>
+			<td><%= link_to circle.name, circle_path(circle) %></td>
+			<td><%= circle.members_count %></td>
+			<td><%= circle.description %></td>
+			<td><%= circle.created_at %></td>
+			<td><%= circle.updated_at %></td>
+			<td><%= link_to 'edit', edit_circle_path(circle) %></td>
+		</tr>
+	<% end %>
 </table>
-
+<br>
+<%= link_to 'create circle', controller: 'circles', action: 'new' %>

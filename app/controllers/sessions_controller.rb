@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     # ログインページを返すだけ
-    
+    @user = User.new
   end
 
   def create
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if @user != nil && @user.password == credentials[:password]
       session[:user_id] = @user.id
       # layout/application.htmlから呼び出す
-      redirect_to root_path, notice: 'ログインしました'
+      redirect_to circles_path, notice: 'ログインしました'
     else
       # layout/application.htmlから呼び出す
       flash.now.alert = 'もう一度ご記入ください'
