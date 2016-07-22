@@ -22,6 +22,8 @@
 		<th>
 			<p>Circle update time</p>
 		</th>
+		<th></th>
+		<th></th>
 	</tr>
 	<% @circles.each do |circle| %>
 		<tr>
@@ -31,6 +33,7 @@
 			<td><%= circle.created_at %></td>
 			<td><%= circle.updated_at %></td>
 			<td><%= link_to 'edit', edit_circle_path(circle) %></td>
+			<td><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></td>
 		</tr>
 	<% end %>
 </table>

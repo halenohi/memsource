@@ -14,6 +14,7 @@ class CirclesController < ApplicationController
 
   def create
     @circle = Circle.new(circle_params)
+    
     # saveでdbに保存
     if @circle.save
       redirect_to circles_path, notice: 'サークル作成しました'
@@ -38,8 +39,9 @@ class CirclesController < ApplicationController
   end
 
   def destroy
-    circle.delete(:circle_id)
-    render :new
+    @circle = Circle.find(params[:id])
+    @circle.destroy
+    redirect_to circles_path, notice: '消去しました'
   end
 
   private
