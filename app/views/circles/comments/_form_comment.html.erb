@@ -1,0 +1,12 @@
+<%# 親の@circleを継承させる => [@circle, @comment] %>
+<%= form_for [@circle, @comment] do |f| %>
+<%#= @circle.errors.full_messages.to_json %>
+	<div class="comment">
+		<%= f.label :comment, 'Comment' %>
+		<%= f.text_area :content, placeholder: 'comment' %>
+	</div>
+	<br>
+	<%= f.submit 'create' %>
+<% end %>
+<br>
+<%= link_to 'back', :back %>

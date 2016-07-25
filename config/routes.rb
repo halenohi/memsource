@@ -1,46 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
 
-  namespace :memberships do
-    get 'acceptances/create'
-  end
-
-  namespace :circles do
-    get 'comments/edit'
-  end
-
-  namespace :circles do
-    get 'comments/new'
-  end
-
-  namespace :circles do
-    get 'comments/create'
-  end
-
-  namespace :circles do
-    get 'comments/update'
-  end
-
-  namespace :circles do
-    get 'memberships/create'
-  end
-
-  get 'comments/destroy'
-
-  get 'circles/index'
-
-  get 'circles/show'
-
-  get 'circles/new'
-
-  get 'circles/create'
-
-  get 'circles/edit'
-
-  get 'circles/update'
-
-  get 'circles/destroy'
-
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'

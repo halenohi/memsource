@@ -6,6 +6,8 @@ class CirclesController < ApplicationController
   def show
     # @circleからid取得
     @circle = Circle.find(params[:id])
+    # 最新時間の順のに並べ、変数に入れる
+    @comments = @circle.comments.order(created_at: :desc)
   end
 
   def new

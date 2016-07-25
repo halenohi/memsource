@@ -32,10 +32,10 @@
 			<td><%= circle.description %></td>
 			<td><%= circle.created_at %></td>
 			<td><%= circle.updated_at %></td>
-			<td><%= link_to 'edit', edit_circle_path(circle) %></td>
-			<td><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></td>
+			<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
+			<td><h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3></td>
 		</tr>
 	<% end %>
 </table>
 <br>
-<%= link_to 'create circle', controller: 'circles', action: 'new' %>
+<h3><%= link_to 'create circle', controller: 'circles', action: 'new' %></h3>
