@@ -6,6 +6,9 @@
 <p><%= @circle.description %></p>
 <h2>Circle Member</h2>
 <p><%= @circle.members_count %></p>
+<% @circle.members.each do |member| %>
+	<p><%= member.name %></p>
+<% end %>
 <h2>Comment list</h2>
 
 <%# commentの配列をcountする %>
@@ -25,7 +28,6 @@
 
 <%# circleを継承させる %>
 <h3><%= link_to 'create comment', new_circle_comment_path(@circle) %></h3>
-<br>
-<br>
+
 <h2>Circle</h2>
 <h3><%= link_to 'back', circles_path %> | <%= link_to 'edit', edit_circle_path(@circle) %></h3>

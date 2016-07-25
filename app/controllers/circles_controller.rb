@@ -1,11 +1,23 @@
 class CirclesController < ApplicationController
   def index
     @circles = Circle.all.order(updated_at: :desc)
+
+    # user_idを受け取る
+    @user = User.find(session[:user_id])
   end
 
   def show
     # @circleからid取得
     @circle = Circle.find(params[:id])
+
+    # user_idを受け取る
+    @user = User.find(session[:user_id])
+
+    # include?メソッドは、配列の要素に引数objが含まれていればtrue
+    if !@circle.members.include?(@user)
+      redirect_to :back, alert: 'まだ参加してない' and return
+    end
+
     # 最新時間の順のに並べ、変数に入れる
     @comments = @circle.comments.order(created_at: :desc)
   end

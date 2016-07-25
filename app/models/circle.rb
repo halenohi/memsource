@@ -11,5 +11,11 @@ class Circle < ApplicationRecord
   	presence: true
 
   has_many :memberships
+
+  has_many :members,
+    class_name: 'User',
+    source: :user,
+    through: :memberships
+
   has_many :comments
 end

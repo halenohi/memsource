@@ -11,7 +11,7 @@
 			<p>Circle name</p>
 		</th>
 		<th>
-			<p>Circle people</p>
+			<p>Circle member</p>
 		</th>
 		<th>
 			<p>Circle description</p>
@@ -34,6 +34,12 @@
 			<td><%= circle.updated_at %></td>
 			<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
 			<td><h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3></td>
+			<td>
+				<%# include?メソッドは、配列の要素に引数objが含まれていればtrue %>
+				<% if !circle.members.include?(@user) %>
+				<%= link_to 'join circle', circle_memberships_path(circle), data: { method: 'post' } %>
+				<% end %>
+			</td>
 		</tr>
 	<% end %>
 </table>
