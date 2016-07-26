@@ -63,6 +63,10 @@ GEM
     ffi (1.9.14)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     i18n (0.7.0)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -175,6 +179,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (0.1.1)
     web-console (3.3.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -192,6 +197,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   email_validator
   factory_girl_rails
+  hirb
+  hirb-unicode
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

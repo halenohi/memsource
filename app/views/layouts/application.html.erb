@@ -12,6 +12,7 @@
 
   <body>
     <h1>MEMsource</h1>
+    <h2>-----------------------------------</h2>
 
     <% if notice %>
       <p><%= notice %></p>
@@ -22,6 +23,7 @@
     <% end %>
 
     <%= yield %>
-    <h2>footer</h2>
+    <h2>-----------------------------------</h2>
+    <h3><%= link_to 'HOME', root_path %></h3>
   </body>
 </html>

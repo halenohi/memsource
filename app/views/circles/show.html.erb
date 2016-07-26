@@ -5,12 +5,12 @@
 <h2>Circle Description</h2>
 <p><%= @circle.description %></p>
 <h2>Circle Member</h2>
-<p><%= @circle.members_count %></p>
+<p><strong><%= @circle.members_count %></strong> 人</p>
 <% @circle.members.each do |member| %>
-	<p><%= member.name %></p>
+	<p><%= member.name %> さん</p>
 <% end %>
 <h2>Comment list</h2>
-
+<p>total comments <strong><%= @circle.comments.count %></strong>件</p>
 <%# commentの配列をcountする %>
 <% if @comments.count == 0 %>
 	<p>コメントはありません</p>
@@ -18,6 +18,7 @@
 	<%# @commentsの配列をcommnetのキーに入れる %>
 	<% @comments.each do |comment| %>
 		<%# commentキーを使い欲しいカラムを取得 %>
+		<p>---------------------------------</p>
 		<p>
 			<%= comment.content %>
 		</p>
@@ -25,6 +26,7 @@
 		<h3><%= link_to 'destroy', comment_path(comment),method: :delete %> | <%= link_to 'edit', edit_circle_comment_path(@circle, comment) %></h3>
 	<% end %>
 <% end %>
+<p>---------------------------------</p>
 
 <%# circleを継承させる %>
 <h3><%= link_to 'create comment', new_circle_comment_path(@circle) %></h3>
