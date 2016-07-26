@@ -5,4 +5,6 @@ class Membership < ApplicationRecord
 
   belongs_to :user
   belongs_to :circle, counter_cache: :members_count
+
+  enum role: [:pending, :member, :owner]
 end

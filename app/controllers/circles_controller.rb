@@ -7,7 +7,7 @@ class CirclesController < ApplicationController
   end
 
   def show
-    # @circleからid取得
+    # circleのidを受け取る
     @circle = Circle.find(params[:id])
 
     # user_idを受け取る
@@ -28,9 +28,13 @@ class CirclesController < ApplicationController
 
   def create
     @circle = Circle.new(circle_params)
+    @user = User.find(session[:user_id])
     
     # saveでdbに保存
     if @circle.save
+
+      # 作成した人をownerにする
+      @circle.memberships.create(user: @user, role: :owner)
       redirect_to circles_path, notice: 'サークル作成しました'
     else
       flash.now.alert = '作成に失敗しました'

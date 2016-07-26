@@ -11,15 +11,17 @@
 <% end %>
 <h2>Comment list</h2>
 <p>total comments <strong><%= @circle.comments.count %></strong>件</p>
+
 <%# commentの配列をcountする %>
 <% if @comments.count == 0 %>
 	<p>コメントはありません</p>
 <% else %>
+
 	<%# @commentsの配列をcommnetのキーに入れる %>
 	<% @comments.each do |comment| %>
-		<%# commentキーを使い欲しいカラムを取得 %>
 		<p>---------------------------------</p>
 		<p>
+			<%# commentキーを使い欲しいカラムを取得 %>
 			<%= comment.content %>
 		</p>
 		<%= comment.created_at %>

@@ -1,0 +1,18 @@
+<h1>Circles::Membership#index</h1>
+
+<% @memberships.each do |member| %>
+	<p>
+		<%= member.user_id %> | 
+		<% if member.role == 'pending' %>
+			<%= member.role %>
+
+			<%# わからない場合ターミナルでbin/rake rotuesで確認 (:が付いたものを指定)%>
+			<%# postで送りたい場合 data: { method: :post } %>
+			<%= link_to '承認', circle_membership_acceptance_path(@circle, member), data: { method: :post } %>
+		<% else %>
+			<%= member.role %>
+		<% end %>
+	</p>
+<% end %>
+
+<%= link_to 'circle page', circles_path %>

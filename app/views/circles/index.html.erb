@@ -22,22 +22,33 @@
 		<th>
 			<p>Circle update time</p>
 		</th>
-		<th></th>
-		<th></th>
+		<th>
+			<p>members</p>
+		</th>
+		<th>
+			<p>edit</p>
+		</th>
+		<th>
+			<p>destroy</p>
+		</th>
+		<th>
+			<p>join</p>
+		</th>
 	</tr>
 	<% @circles.each do |circle| %>
 		<tr>
 			<td><%= link_to circle.name, circle_path(circle) %></td>
-			<td><%= circle.members_count %></td>
+			<td><center><%= circle.members_count %> 名</center></td>
 			<td><%= circle.description %></td>
 			<td><%= circle.created_at %></td>
 			<td><%= circle.updated_at %></td>
+			<td><h3><%= link_to 'list', circle_memberships_path(circle) %></h3></td>
 			<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
 			<td><h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3></td>
 			<td>
 				<%# include?メソッドは、配列の要素に引数objが含まれていればtrue %>
 				<% if !circle.members.include?(@user) %>
-				<%= link_to 'join circle', circle_memberships_path(circle), data: { method: 'post' } %>
+				<h3><%= link_to 'join', circle_memberships_path(circle), data: { method: 'post' } %></h3>
 				<% end %>
 			</td>
 		</tr>
