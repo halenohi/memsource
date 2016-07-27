@@ -1,14 +1,14 @@
 class Circles::CommentsController < ApplicationController
   def new
   	# circle_idを引き継ぎさせる
-  	@circle = Circle.find(params[:circle_id])
+  	circle_circle_id
 
   	# @circleとcommentsを組み立てる(build)
   	@comment = @circle.comments.build
   end
 
   def create
-  	@circle = Circle.find(params[:circle_id])
+  	circle_circle_id
 
   	# buildとnewは同じ働きをする
   	@comment = @circle.comments.build(comment_params)
@@ -22,15 +22,15 @@ class Circles::CommentsController < ApplicationController
 
   def edit
     # 親をfind
-  	@circle = Circle.find(params[:circle_id])
+  	circle_circle_id
 
     # 子をfind
-    @comment = @circle.comments.find(params[:id])
+    comment_id
   end
 
   def update
-  	@circle = Circle.find(params[:circle_id])
-    @comment = @circle.comments.find(params[:id])
+  	circle_circle_id
+    comment_id
 
   	if @comment.update(comment_params)
       # circleのshowに飛ばす
@@ -44,4 +44,12 @@ class Circles::CommentsController < ApplicationController
   	def comment_params
   		params.require(:comment).permit(:content).merge(user_id: session[:user_id])
   	end
+
+    def circle_circle_id
+      @circle = Circle.find(params[:circle_id])
+    end
+
+    def comment_id
+      @comment = @circle.comments.find(params[:id])
+    end
 end

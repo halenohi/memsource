@@ -23,13 +23,19 @@
 			<%= comment.content %>
 		</p>
 		<%= comment.created_at %>
-		<h3><%= link_to 'destroy', comment_path(comment),method: :delete %> | <%= link_to 'edit', edit_circle_comment_path(@circle, comment) %></h3>
+		<h3>
+			<%= link_to 'destroy', comment_path(comment),method: :delete %> |
+			<%= link_to 'edit', edit_circle_comment_path(@circle, comment) %>
+		</h3>
 	<% end %>
 <% end %>
 <p>---------------------------------</p>
 
 <%# circleを継承させる %>
 <h3><%= link_to 'create comment', new_circle_comment_path(@circle) %></h3>
-
-<h2>Circle</h2>
-<h3><%= link_to 'back', circles_path %> | <%= link_to 'edit', edit_circle_path(@circle) %></h3>
+<% if policy(circle.memberships.build).update? %>
+	<h2>Circle</h2>
+	<h3><%= link_to 'back', circles_path %> | <%= link_to 'edit', edit_circle_path(@circle) %></h3>
+<% else %>
+	<h3><%= link_to 'back', circles_path %></h3>
+<% end %>

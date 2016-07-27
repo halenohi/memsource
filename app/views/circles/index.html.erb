@@ -48,13 +48,14 @@
 			<td><%= circle.created_at %></td>
 			<td><%= circle.updated_at %></td>
 			<td><center><h3><%= link_to 'list', circle_memberships_path(circle) %></h3></center></td>
-			<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
-			<td>
-				<%# ボタンの出し分け %>
-				<% if policy(circle).update? %>
-					<h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3>
-				<% end %>
-			</td>
+			<%# ボタンの出し分け %>
+			<% if policy(circle).update? %>
+				<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
+				<td><h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3></td>
+			<% else %>
+				<td></td>
+				<td></td>
+			<% end %>
 			<td>
 				<%# policyを build %>
 				<% if policy(circle.memberships.build).create? %>

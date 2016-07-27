@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
     def current_user
       User.find_by(id: session[:user_id])
     end
+
+    def session_user
+      @user = User.find(session[:user_id])
+    end
+
+    def circle_id
+      @circle = Circle.find(params[:id])
+    end
 end

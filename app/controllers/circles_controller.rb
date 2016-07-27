@@ -5,18 +5,18 @@ class CirclesController < ApplicationController
     @circles = Circle.all.order(updated_at: :desc)
 
     # user_idを受け取る
-    @user = User.find(session[:user_id])
+    session_user
   end
 
   def show
     # circleのidを受け取る
-    @circle = Circle.find(params[:id])
+    circle_id
 
     # policiesで対応ファイル指定
     authorize @circle
 
     # user_idを受け取る
-    @user = User.find(session[:user_id])
+    session_user
 
     # include?メソッドは、配列の要素に引数objが含まれていればtrue
     if !@circle.members.include?(@user)
@@ -33,7 +33,7 @@ class CirclesController < ApplicationController
 
   def create
     @circle = Circle.new(circle_params)
-    @user = User.find(session[:user_id])
+    session_user
     
     # saveでdbに保存
     if @circle.save
@@ -48,11 +48,11 @@ class CirclesController < ApplicationController
   end
 
   def edit
-    @circle = Circle.find(params[:id])
+    circle_id
   end
 
   def update
-    @circle = Circle.find(params[:id])
+    circle_id
 
     if @circle.update(circle_params)
       redirect_to @circle
@@ -62,11 +62,11 @@ class CirclesController < ApplicationController
   end
 
   def destroy
-    @circle = Circle.find(params[:id])
+    circle_id
 
     # policiesで対応ファイル指定
-    authorize @circle
-    
+    # authorize @circle
+
     @circle.destroy
     redirect_to circles_path, notice: 'サークルを消去しました'
   end
