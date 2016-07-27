@@ -1,5 +1,6 @@
 class Circles::MembershipsController < ApplicationController
   def index
+    @user = User.new
     @circle = Circle.find(params[:circle_id])
     @memberships = @circle.memberships
   end
@@ -15,7 +16,7 @@ class Circles::MembershipsController < ApplicationController
       MembershipMailer.new_member(@circle).deliver_now
   		redirect_to circles_path(@circle), notice: '管理者に申請を送りました'
   	else
-  		flash.now.alert = '申請を遅れませんでした'
+  		flash.now.alert = '申請を送れませんでした'
   		render :new
   	end
   end

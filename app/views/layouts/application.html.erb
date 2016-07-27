@@ -12,12 +12,8 @@
 
   <body>
     <h1>MEMsource</h1>
-    <%# if user_signed_in? %>
-      <%# user = User.find(session[:user_id]) %>
-      <p><strong>-----------------------------------<%# user.name %></strong> さん</p>
-    <% else %>
-      <!-- <p><strong>-----------------------------------</strong></p> -->
-    <%# end %>
+
+    <!-- login user name -->
     
     <% if notice %>
       <p><%= notice %></p>

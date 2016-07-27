@@ -4,13 +4,11 @@
 <p><%= @circle.name %></p>
 <h2>Circle Description</h2>
 <p><%= @circle.description %></p>
-<h2>Circle Member</h2>
-<p><strong><%= @circle.members_count %></strong> 人</p>
+<h2>Circle Member <%= @circle.members_count %> 人</h2>
 <% @circle.members.each do |member| %>
 	<p><%= member.name %> さん</p>
 <% end %>
-<h2>Comment list</h2>
-<p>total comments <strong><%= @circle.comments.count %></strong>件</p>
+<h2>Comment list <%= @circle.comments.count %>件</h2>
 
 <%# commentの配列をcountする %>
 <% if @comments.count == 0 %>

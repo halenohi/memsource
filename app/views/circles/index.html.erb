@@ -4,6 +4,9 @@
 }
 </style>
 
+<% user = User.find(session[:user_id]) %>
+<p><strong>-----------------------------------お帰りなさい：<%= user.name %></strong> さん</p>
+
 <h1>Circles#index</h1>
 <table class="table2" border=1>
 	<tr>
@@ -23,7 +26,7 @@
 			<p>Circle update time</p>
 		</th>
 		<th>
-			<p>members</p>
+			<p>member</p>
 		</th>
 		<th>
 			<p>edit</p>
@@ -39,16 +42,24 @@
 		<tr>
 			<td><%= link_to circle.name, circle_path(circle) %></td>
 			<td><center><%= circle.members_count %> 名</center></td>
-			<td><%= circle.description %></td>
+
+			<%# 文字数制限 20文字 %>
+			<td><%= circle.description.truncate(20) %></td>
 			<td><%= circle.created_at %></td>
 			<td><%= circle.updated_at %></td>
-			<td><h3><%= link_to 'list', circle_memberships_path(circle) %></h3></td>
+			<td><center><h3><%= link_to 'list', circle_memberships_path(circle) %></h3></center></td>
 			<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
-			<td><h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3></td>
 			<td>
-				<%# include?メソッドは、配列の要素に引数objが含まれていればtrue %>
-				<% if !circle.members.include?(@user) %>
-				<h3><%= link_to 'join', circle_memberships_path(circle), data: { method: 'post' } %></h3>
+				<%# ボタンの出し分け %>
+				<% if policy(circle).update? %>
+					<h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3>
+				<% end %>
+			</td>
+			<td>
+				<%# policyを build %>
+				<% if policy(circle.memberships.build).create? %>
+					<%# include?メソッドは、配列の要素に引数objが含まれていればtrue %>
+					<h3><%= link_to 'join', circle_memberships_path(circle), data: { method: 'post' } %></h3>
 				<% end %>
 			</td>
 		</tr>

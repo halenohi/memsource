@@ -2,17 +2,23 @@
 
 <% @memberships.each do |member| %>
 	<p>
-		<%= member.user_id %> | 
+		<%= member.user.name %> |
 		<% if member.role == 'pending' %>
 			<%= member.role %>
 
-			<%# わからない場合ターミナルでbin/rake rotuesで確認 (:が付いたものを指定)%>
-			<%# postで送りたい場合 data: { method: :post } %>
-			<%= link_to '承認', circle_membership_acceptance_path(@circle, member), data: { method: :post } %>
+			<%# ボタンの出し分け %>
+			<% if policy(member).update? %>
+				<%# ターミナルでbin/rake rotues で確認
+					prefix と :が付いた id を指定 %>
+				<%# postで送りたい場合
+					data: { method: :post } %>
+				<%= link_to '承認', circle_membership_acceptance_path(@circle, member), data: { method: :post } %>
+			<% end %>
 		<% else %>
 			<%= member.role %>
 		<% end %>
 	</p>
 <% end %>
+<p>=========================================</p>
 
 <%= link_to 'circle page', circles_path %>

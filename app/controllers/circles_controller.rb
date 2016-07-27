@@ -1,5 +1,7 @@
 class CirclesController < ApplicationController
   def index
+    # policiesで対応ファイル指定
+    authorize Circle
     @circles = Circle.all.order(updated_at: :desc)
 
     # user_idを受け取る
@@ -9,6 +11,9 @@ class CirclesController < ApplicationController
   def show
     # circleのidを受け取る
     @circle = Circle.find(params[:id])
+
+    # policiesで対応ファイル指定
+    authorize @circle
 
     # user_idを受け取る
     @user = User.find(session[:user_id])
@@ -58,8 +63,12 @@ class CirclesController < ApplicationController
 
   def destroy
     @circle = Circle.find(params[:id])
+
+    # policiesで対応ファイル指定
+    authorize @circle
+    
     @circle.destroy
-    redirect_to circles_path, notice: '消去しました'
+    redirect_to circles_path, notice: 'サークルを消去しました'
   end
 
   private
