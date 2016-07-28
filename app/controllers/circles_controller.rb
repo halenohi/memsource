@@ -30,8 +30,10 @@ class CirclesController < ApplicationController
     @circle = Circle.new(circle_params)
     authorize @circle
 
+    # errorがおきそうな所を begin rescueで囲む
     begin
       ActiveRecord::Base.transaction do
+        # dbに２回保存させるから、わざと例外を起こさせる !
         @circle.save!
         @circle.memberships.create!(user: current_user, role: :owner)
       end
