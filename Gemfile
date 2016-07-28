@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'email_validator'
+# policy
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -40,6 +42,11 @@ group :development, :test do
   gem "factory_girl_rails"
   gem 'spring-commands-rspec'
   gem 'tapp'
+  gem 'rails-controller-testing'
+  # モデルの出力結果を表形式で表示するGem
+  gem 'hirb'
+  # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
+  gem 'hirb-unicode'
 end
 
 group :development do

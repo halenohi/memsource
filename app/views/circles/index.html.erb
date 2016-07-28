@@ -1,0 +1,83 @@
+<style type="text/css">
+.table2 th {
+  background-color: #cccccc;
+}
+</style>
+
+<% user = User.find(session[:user_id]) %>
+<p><strong>-----------------------------------お帰りなさい：<%= user.name %></strong> さん</p>
+
+<h1>Circles#index</h1>
+<table class="table2" border=1>
+	<tr>
+		<th>
+			<p>Circle name</p>
+		</th>
+		<th>
+			<p>Circle member</p>
+		</th>
+		<th>
+			<p>Circle description</p>
+		</th>
+		<th>
+			<p>Circle create time</p>
+		</th>
+		<th>
+			<p>Circle update time</p>
+		</th>
+		<th>
+			<p>member</p>
+		</th>
+		<th>
+			<p>edit</p>
+		</th>
+		<th>
+			<p>destroy</p>
+		</th>
+		<th>
+			<p>join</p>
+		</th>
+	</tr>
+	<% @circles.each do |circle| %>
+		<tr>
+			<td><%= link_to circle.name, circle_path(circle) %></td>
+
+			<td>
+			<%# memberになったら人数を増やす %>
+			<%# if circle.id == 'member' && circle.id == 'owner' %>
+				<center><%= circle.members_count %> 名</center>
+			<%# end %>
+			</td>
+
+			<%# 文字数制限 20文字 %>
+			<td><%= circle.description.truncate(20) %></td>
+			<td><%= circle.created_at %></td>
+			<td><%= circle.updated_at %></td>
+			<td><center><h3><%= link_to 'list', circle_memberships_path(circle) %></h3></center></td>
+
+			<%# ボタンの出し分け %>
+			<% if policy(circle).update? %>
+				<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
+				<td>
+					<h3>
+						<%# if %>
+							<%= link_to 'destroy', circle_path(circle), data: { method: :delete, confirm: 'Are you sure? '} %>
+						<%# end %>
+					</h3>
+				</td>
+			<% else %>
+				<td></td>
+				<td></td>
+			<% end %>
+			<td>
+				<%# policyを build %>
+				<% if policy(circle.memberships.build).create? %>
+					<%# include?メソッドは、配列の要素に引数objが含まれていればtrue %>
+					<h3><%= link_to 'join', circle_memberships_path(circle), data: { method: 'post' } %></h3>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<br>
+<h3><%= link_to 'create circle', controller: 'circles', action: 'new' %></h3>
