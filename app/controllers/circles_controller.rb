@@ -1,25 +1,19 @@
 class CirclesController < ApplicationController
+  before_action :set_circle, only: [:show, :edit, :update, :destroy]
   def index
     # policiesで対応ファイル指定
     authorize Circle
     @circles = Circle.all.order(updated_at: :desc)
-
-    # user_idを受け取る
-    session_user
   end
 
   def show
     # circleのidを受け取る
-    circle_id
 
     # policiesで対応ファイル指定
-    authorize @circle
-
-    # user_idを受け取る
-    session_user
+    # authorize @circle
 
     # include?メソッドは、配列の要素に引数objが含まれていればtrue
-    if !@circle.members.include?(@user)
+    if !@circle.members.include?(current_user)
       redirect_to :back, alert: 'まだ参加してない' and return
     end
 
@@ -29,31 +23,30 @@ class CirclesController < ApplicationController
 
   def new
     @circle = Circle.new
+    authorize @circle
   end
 
   def create
     @circle = Circle.new(circle_params)
-    session_user
-    
-    # saveでdbに保存
-    if @circle.save
+    authorize @circle
 
-      # 作成した人をownerにする
-      @circle.memberships.create(user: @user, role: :owner)
+    begin
+      ActiveRecord::Base.transaction do
+        @circle.save!
+        @circle.memberships.create!(user: current_user, role: :owner)
+      end
       redirect_to circles_path, notice: 'サークル作成しました'
-    else
-      flash.now.alert = '作成に失敗しました'
+    rescue => e
+      logger.error e.inspect + e.backtrace.join("\n")
+      flash.now.lert = '作成に失敗しました'
       render :new
     end
   end
 
   def edit
-    circle_id
   end
 
   def update
-    circle_id
-
     if @circle.update(circle_params)
       redirect_to @circle
     else
@@ -62,17 +55,17 @@ class CirclesController < ApplicationController
   end
 
   def destroy
-    circle_id
-
-    # policiesで対応ファイル指定
-    # authorize @circle
-
     @circle.destroy
-    redirect_to circles_path, notice: 'サークルを消去しました'
+    redirect_to circles_path, notice: 'サークルを削除しました'
   end
 
   private
     def circle_params
       params.require(:circle).permit(:name, :description)
+    end
+
+    def set_circle
+      @circle = Circle.find(params[:id])
+      authorize @circle
     end
 end

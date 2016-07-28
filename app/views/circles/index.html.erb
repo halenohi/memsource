@@ -41,17 +41,30 @@
 	<% @circles.each do |circle| %>
 		<tr>
 			<td><%= link_to circle.name, circle_path(circle) %></td>
-			<td><center><%= circle.members_count %> 名</center></td>
+
+			<td>
+			<%# memberになったら人数を増やす %>
+			<%# if circle.id == 'member' && circle.id == 'owner' %>
+				<center><%= circle.members_count %> 名</center>
+			<%# end %>
+			</td>
 
 			<%# 文字数制限 20文字 %>
 			<td><%= circle.description.truncate(20) %></td>
 			<td><%= circle.created_at %></td>
 			<td><%= circle.updated_at %></td>
 			<td><center><h3><%= link_to 'list', circle_memberships_path(circle) %></h3></center></td>
+
 			<%# ボタンの出し分け %>
 			<% if policy(circle).update? %>
 				<td><h3><%= link_to 'edit', edit_circle_path(circle) %></h3></td>
-				<td><h3><%= link_to 'destroy', circle_path(circle), method: :delete, fata: { confirm: 'Are you sure? '} %></h3></td>
+				<td>
+					<h3>
+						<%# if %>
+							<%= link_to 'destroy', circle_path(circle), data: { method: :delete, confirm: 'Are you sure? '} %>
+						<%# end %>
+					</h3>
+				</td>
 			<% else %>
 				<td></td>
 				<td></td>

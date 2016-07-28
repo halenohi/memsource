@@ -24,7 +24,7 @@ class CirclePolicy < ApplicationPolicy
 	end
 
 	def destroy?
-		is_owner? && record.memberships == [user]
+		is_owner? && record.members == [user]
 	end
 
 	private

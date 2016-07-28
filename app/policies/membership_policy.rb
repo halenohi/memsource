@@ -4,20 +4,8 @@ class MembershipPolicy < ApplicationPolicy
 		user_logged_in?
 	end
 
-	def show?
-		user_logged_in?
-	end
-
-	def new?
-		user_logged_in?
-	end
-
 	def create?
 		user_logged_in? && !record.circle.memberships.map{ |membership| membership.user }.include?(user)
-	end
-
-	def edit?
-		is_owner?
 	end
 
 	def update?

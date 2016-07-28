@@ -1,14 +1,18 @@
 class Circles::CommentsController < ApplicationController
+  before_action :set_circle
+  before_action :set_comment, only: [:edit, :update]
+
   def new
   	# circle_idを引き継ぎさせる
-  	circle_circle_id
+  	# set_circle
 
   	# @circleとcommentsを組み立てる(build)
   	@comment = @circle.comments.build
+    authorize @comment
   end
 
   def create
-  	circle_circle_id
+  	# set_circle
 
   	# buildとnewは同じ働きをする
   	@comment = @circle.comments.build(comment_params)
@@ -22,15 +26,15 @@ class Circles::CommentsController < ApplicationController
 
   def edit
     # 親をfind
-  	circle_circle_id
+  	# set_circle
 
     # 子をfind
-    comment_id
+    # set_comment
   end
 
   def update
-  	circle_circle_id
-    comment_id
+  	# set_circle
+    # set_comment
 
   	if @comment.update(comment_params)
       # circleのshowに飛ばす
@@ -45,11 +49,11 @@ class Circles::CommentsController < ApplicationController
   		params.require(:comment).permit(:content).merge(user_id: session[:user_id])
   	end
 
-    def circle_circle_id
+    def set_circle
       @circle = Circle.find(params[:circle_id])
     end
 
-    def comment_id
+    def set_comment
       @comment = @circle.comments.find(params[:id])
     end
 end

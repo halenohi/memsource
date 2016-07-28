@@ -19,23 +19,28 @@
 	<% @comments.each do |comment| %>
 		<p>---------------------------------</p>
 		<p>
-			<%# commentキーを使い欲しいカラムを取得 %>
+			<%# commentキーを使い、欲しいカラムを取得 %>
 			<%= comment.content %>
 		</p>
 		<%= comment.created_at %>
-		<h3>
-			<%= link_to 'destroy', comment_path(comment),method: :delete %> |
-			<%= link_to 'edit', edit_circle_comment_path(@circle, comment) %>
-		</h3>
+		<% if policy(@circle).update? %>
+			<h3>
+				<%= link_to 'destroy', comment_path(comment),method: :delete %> |
+				<%= link_to 'edit', edit_circle_comment_path(@circle, comment) %>
+			</h3>
+		<% end %>
 	<% end %>
 <% end %>
 <p>---------------------------------</p>
 
 <%# circleを継承させる %>
 <h3><%= link_to 'create comment', new_circle_comment_path(@circle) %></h3>
-<% if policy(circle.memberships.build).update? %>
+
+<%# 権限処理 %>
+<% if policy(@circle).edit? %>
 	<h2>Circle</h2>
-	<h3><%= link_to 'back', circles_path %> | <%= link_to 'edit', edit_circle_path(@circle) %></h3>
-<% else %>
-	<h3><%= link_to 'back', circles_path %></h3>
+	<h3>
+		<%= link_to 'edit', edit_circle_path(@circle) %>
+	</h3>
 <% end %>
+<h3><%= link_to 'back', circles_path %></h3>
