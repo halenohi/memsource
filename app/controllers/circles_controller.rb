@@ -1,5 +1,7 @@
 class CirclesController < ApplicationController
+  before_action :authenticate_user
   before_action :set_circle, only: [:show, :edit, :update, :destroy]
+
   def index
     # policiesで対応ファイル指定
     authorize Circle
@@ -40,7 +42,7 @@ class CirclesController < ApplicationController
       redirect_to circles_path, notice: 'サークル作成しました'
     rescue => e
       logger.error e.inspect + e.backtrace.join("\n")
-      flash.now.lert = '作成に失敗しました'
+      flash.now.alert = '作成に失敗しました'
       render :new
     end
   end
@@ -50,9 +52,10 @@ class CirclesController < ApplicationController
 
   def update
     if @circle.update(circle_params)
-      redirect_to @circle
+      redirect_to @circle, notice: "変更しました"
     else
-      render 'edit'
+      flash.now.alert = "変更できませんでした"
+      render :edit
     end
   end
 

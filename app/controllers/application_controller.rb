@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
       redirect_to :back, alert: '操作が完了できませんでした'
     end
 
+    def authenticate_user
+      if current_user == nil
+        redirect_to login_path, alert: 'ログインしてください'
+      end
+    end
+
 end

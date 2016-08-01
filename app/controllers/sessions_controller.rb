@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   def destroy
     # ログアウトしてログインページにリダイレクト
     session.delete(:user_id)
-    redirect_to login_path, noitce: 'ログアウトしました'
+    redirect_to login_path, notice: 'ログアウトしました'
   end
 
   # sessionから取得データに条件をつける
