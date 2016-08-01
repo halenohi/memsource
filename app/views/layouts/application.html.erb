@@ -6,10 +6,25 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag '/assets/favicon_ico.jpg' %>
   </head>
+  <link href="/assets/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 
   <body>
-    <p>test</p>
+    <h1>MEMsource</h1>
+
+    <!-- login user name -->
+    
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
+
     <%= yield %>
+    <h2>-----------------------------------</h2>
+    <h3><%= link_to 'HOME', root_path %></h3>
   </body>
 </html>

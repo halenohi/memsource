@@ -1,0 +1,4 @@
+<h1>home#</h1>
+<%= link_to 'sign up', controller: 'users', action: 'new' %>
+<%= link_to 'sign in', controller: 'sessions', action: 'create' %>
+<%= link_to 'sign out', logout_path, data: { method: 'delete' } %>
